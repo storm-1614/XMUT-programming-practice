@@ -1,6 +1,8 @@
 # 校园通讯录管理系统的设计与实现
 XMUT 大一下程序设计实践必做题  
 
+![](./res/mainwindow.png)
+
 ## 框架
 采用 QT6 C++ 库。采用 QWidget  
 
