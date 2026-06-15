@@ -7,6 +7,33 @@
 Contacts::Contacts()
 {
 }
+
+QString Contacts::getId() const
+{
+    return id;
+}
+
+QString Contacts::getName() const
+{
+    return name;
+}
+QString Contacts::getPhoneNumber() const
+{
+    return phoneNumber;
+}
+QString Contacts::getType() const
+{
+    return type;
+}
+QString Contacts::getRemarks() const
+{
+    return remarks;
+}
+QString Contacts::getBirth() const
+{
+    return Birth.text();
+}
+
 bool Contacts::setId(QString strID)
 {
     this->id = strID;
@@ -18,6 +45,11 @@ bool Contacts::setName(QString n)
     return true;
 }
 
+bool Contacts::setPhoneNumber(QString number)
+{
+    this->phoneNumber = number;
+    return true;
+}
 bool Contacts::setType(QString type)
 {
     this->type = type;
@@ -33,7 +65,6 @@ bool Contacts::setBirth(QDate birthday)
     this->Birth = birth;
     return true;
 }
-
 
 bool Contacts::setRemarks(QString strInfo)
 {

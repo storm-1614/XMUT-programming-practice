@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "contactslist.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -18,8 +19,10 @@ class MainWindow : public QMainWindow
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
     bool addContacts();
+    bool updateContacts();
 
   private:
     Ui::MainWindow *ui;
+    contactsList list;
 };
 #endif // MAINWINDOW_H

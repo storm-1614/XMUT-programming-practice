@@ -14,10 +14,9 @@ Date::Date(int y, int m, int d)
 }
 
 
-QString Date::text()
+const QString Date::text() const
 {
-    QString text;
-    text = QString("%1-%2-%3").arg(year).arg(month).arg(day);
+    const QString text = QString("%1-%2-%3").arg(year).arg(month).arg(day);
     return text;
 }
 

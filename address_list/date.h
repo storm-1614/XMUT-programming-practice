@@ -11,7 +11,7 @@ class Date
     bool isLeapYear();
     bool isValid();
     bool dayTo();
-    QString text();
+    const QString text() const;
     
 
   private:

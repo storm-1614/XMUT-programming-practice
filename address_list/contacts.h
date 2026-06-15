@@ -9,14 +9,15 @@ class Contacts
 {
   public:
     Contacts();
-    int getId();
+    QString getId() const;
     QString getName() const;
     QString getPhoneNumber() const;
     QString getType() const;
     QString getRemarks() const;
-    Date getBirth() const;
+    QString getBirth() const;
     bool setId(QString strID);
     bool setName(QString name);
+    bool setPhoneNumber(QString number);
     bool setType(QString type);
     bool setBirth(QDate birthday);
     bool setRemarks(QString strInfo);
