@@ -35,6 +35,12 @@ extern contactsList conList;
 #### `bool MainWindow::searchClicked()`
 按下搜索按钮的时候触发。目前实现了按姓名搜索和按电话号码搜索，还有 bug，没完全实现。  
 
+#### `bool MainWindow::actionAddItem()`
+添加联系人 toolbutton ，弹出新窗口  
+
+#### `bool MainWindow::actionDelItem()`
+删除选中的联系人列表  
+
 ### date
 日期类  
 #### `const QString Date::text() const`
@@ -81,7 +87,18 @@ extern contactsList conList;
 ### statistics
 统计输出类  
 
+### addnewcontacts
+
+### csv_file
+文件读写到 csv 文件
+
 ## 进度
 - [x] Contact 初始化
 - [x] 添加联系人 toolBar 子窗口实现
 - [ ] 搜索
+- [ ] 删除选中项
+- [ ] 文件读写——数据持久化
+- [ ] 日期算法
+- [ ] 排序算法
+- [ ] 联系人修改
+- [ ] 生日提醒

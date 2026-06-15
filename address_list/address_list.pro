@@ -10,6 +10,7 @@ SOURCES += \
     addnewcontacts.cpp \
     contacts.cpp \
     contactslist.cpp \
+    csv_file.cpp \
     date.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -22,6 +23,7 @@ HEADERS += \
     addnewcontacts.h \
     contacts.h \
     contactslist.h \
+    csv_file.h \
     date.h \
     mainwindow.h \
     search.h \
