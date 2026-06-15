@@ -1,8 +1,10 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
 #include "contactslist.h"
+#include <QMainWindow>
+
+extern contactsList conList;
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -20,9 +22,17 @@ class MainWindow : public QMainWindow
     ~MainWindow() override;
     bool addContacts();
     bool updateContacts();
+    bool clearForm();
+    bool searchClicked();
 
   private:
     Ui::MainWindow *ui;
-    contactsList list;
+
+    enum searchType
+    {
+        name = 0,
+        phomeNumber,
+        id
+    };
 };
 #endif // MAINWINDOW_H

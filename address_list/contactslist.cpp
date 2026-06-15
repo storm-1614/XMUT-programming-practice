@@ -10,9 +10,11 @@ bool contactsList::addNewContacts(Contacts ct)
 }
 bool contactsList::removeContacts()
 {
+    // TODO:
 }
 bool contactsList::modifyContacts()
 {
+    // TODO:
 }
 
 const std::vector<Contacts>& contactsList::readContactList() const

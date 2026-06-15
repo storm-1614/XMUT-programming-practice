@@ -12,13 +12,22 @@ SOURCES += \
     contactslist.cpp \
     date.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    search.cpp \
+    searchbyname.cpp \
+    searchbynumber.cpp \
+    statistics.cpp
 
 HEADERS += \
     contacts.h \
     contactslist.h \
     date.h \
-    mainwindow.h
+    main.h \
+    mainwindow.h \
+    search.h \
+    searchbyname.h \
+    searchbynumber.h \
+    statistics.h
 
 FORMS += \
     mainwindow.ui
