@@ -11,7 +11,7 @@ class contactsList
     bool addNewContacts(Contacts ct);
     bool removeContacts();
     bool modifyContacts();
-    const std::vector<Contacts>& readContactList() const;
+    std::vector<Contacts>& readContactList();
 
   private:
     std::vector<Contacts> data;

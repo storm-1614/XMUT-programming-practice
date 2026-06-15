@@ -25,7 +25,8 @@ class MainWindow : public QMainWindow
     bool updateContacts();
     bool clearForm();
     bool searchClicked();
-    bool actionAddStart();
+    bool actionAddItem();
+    bool actionDelItem();
 
   private slots:
   private:

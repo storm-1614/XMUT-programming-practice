@@ -9,7 +9,7 @@ class searchByName : public search
 {
   public:
     searchByName();
-    std::vector<int> find(const QString &Target);
+    std::vector<int> find(const QString &Target) override;
 
 };
 

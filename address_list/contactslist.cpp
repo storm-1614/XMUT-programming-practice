@@ -17,7 +17,7 @@ bool contactsList::modifyContacts()
     // TODO:
 }
 
-const std::vector<Contacts>& contactsList::readContactList() const
+std::vector<Contacts>& contactsList::readContactList()
 {
     return data;
 }
