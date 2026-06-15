@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "addnewcontacts.h"
 #include "contactslist.h"
 #include <QMainWindow>
 
@@ -24,9 +25,12 @@ class MainWindow : public QMainWindow
     bool updateContacts();
     bool clearForm();
     bool searchClicked();
+    bool actionAddStart();
 
+  private slots:
   private:
     Ui::MainWindow *ui;
+    AddNewContacts *add_contacts_win = nullptr;
 
     enum searchType
     {

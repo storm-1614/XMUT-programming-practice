@@ -1,13 +1,13 @@
 QT += widgets
 
 CONFIG += c++17
-CONFIG += console
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    addnewcontacts.cpp \
     contacts.cpp \
     contactslist.cpp \
     date.cpp \
@@ -19,10 +19,10 @@ SOURCES += \
     statistics.cpp
 
 HEADERS += \
+    addnewcontacts.h \
     contacts.h \
     contactslist.h \
     date.h \
-    main.h \
     mainwindow.h \
     search.h \
     searchbyname.h \
@@ -30,6 +30,7 @@ HEADERS += \
     statistics.h
 
 FORMS += \
+    addnewcontacts.ui \
     mainwindow.ui
 
 # Default rules for deployment.

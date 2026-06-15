@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->btnSaveOrAdd, &QPushButton::clicked, this, [this]() { addContacts(); });
     connect(ui->btnClearForm, &QPushButton::clicked, this, [this]() { clearForm(); });
     connect(ui->btnSearch, &QPushButton::clicked, this, [this]() { searchClicked(); });
+    connect(ui->actionAdd, &QAction::triggered, this, [this]() { actionAddStart(); });
 }
 
 MainWindow::~MainWindow()
@@ -109,5 +110,21 @@ bool MainWindow::searchClicked()
     case id: {
     }
     }
+    return true;
+}
+
+bool MainWindow::actionAddStart()
+{
+    /*
+    * 为了防止点击创建多个窗口，设置指针判断
+    */
+    if (add_contacts_win == nullptr)
+    {
+        add_contacts_win = new AddNewContacts(this);
+        add_contacts_win->show();
+    }
+
+    connect(add_contacts_win, &MainWindow::destroyed , this, [this]() { add_contacts_win = nullptr; updateContacts();});
+
     return true;
 }
