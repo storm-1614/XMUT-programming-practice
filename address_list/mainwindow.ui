@@ -1,0 +1,725 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>960</width>
+    <height>640</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>校园通讯录管理系统</string>
+  </property>
+  <property name="windowIcon">
+   <iconset theme="address-book-new"/>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayoutMain">
+    <property name="spacing">
+     <number>8</number>
+    </property>
+    <property name="leftMargin">
+     <number>8</number>
+    </property>
+    <property name="topMargin">
+     <number>8</number>
+    </property>
+    <property name="rightMargin">
+     <number>8</number>
+    </property>
+    <property name="bottomMargin">
+     <number>8</number>
+    </property>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayoutSearch">
+      <property name="spacing">
+       <number>6</number>
+      </property>
+      <item>
+       <widget class="QComboBox" name="comboSearchField">
+        <property name="toolTip">
+         <string>选择搜索字段</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>按姓名搜索</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>按手机号搜索</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>按编号搜索</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEditSearch">
+        <property name="placeholderText">
+         <string>输入搜索关键字...</string>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnSearch">
+        <property name="toolTip">
+         <string>按关键字搜索联系人</string>
+        </property>
+        <property name="text">
+         <string>搜索</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnShowAll">
+        <property name="toolTip">
+         <string>显示所有联系人</string>
+        </property>
+        <property name="text">
+         <string>显示全部</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacerSearch">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="labelReminder">
+        <property name="text">
+         <string>生日提醒：</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDateEdit" name="dateEditToday">
+        <property name="toolTip">
+         <string>设置当前日期</string>
+        </property>
+        <property name="displayFormat">
+         <string>yyyy-MM-dd</string>
+        </property>
+        <property name="calendarPopup">
+         <bool>true</bool>
+        </property>
+        <property name="date">
+         <date>
+          <year>2026</year>
+          <month>6</month>
+          <day>15</day>
+         </date>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="spinBoxRemindDays">
+        <property name="toolTip">
+         <string>未来N天内生日提醒</string>
+        </property>
+        <property name="suffix">
+         <string> 天</string>
+        </property>
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>365</number>
+        </property>
+        <property name="value">
+         <number>7</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnBirthdayReminder">
+        <property name="toolTip">
+         <string>查看未来N天内生日联系人</string>
+        </property>
+        <property name="text">
+         <string>提醒</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayoutMain">
+      <property name="spacing">
+       <number>8</number>
+      </property>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayoutLeft">
+        <property name="spacing">
+         <number>4</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="labelTableTitle">
+          <property name="styleSheet">
+           <string notr="true">font-weight: bold; font-size: 14px;</string>
+          </property>
+          <property name="text">
+           <string>联系人列表</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="tableContacts">
+          <property name="editTriggers">
+           <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+          </property>
+          <property name="alternatingRowColors">
+           <bool>true</bool>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+          <property name="columnCount">
+           <number>6</number>
+          </property>
+          <attribute name="horizontalHeaderCascadingSectionResizes">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>编号</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>姓名</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>手机号</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>类别</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>生日</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>地址/备注</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayoutCount">
+          <item>
+           <widget class="QLabel" name="labelCount">
+            <property name="text">
+             <string>共 0 位联系人</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacerCount">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnStatistics">
+            <property name="toolTip">
+             <string>按类别、月份统计联系人</string>
+            </property>
+            <property name="text">
+             <string>统计信息</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBoxDetail">
+        <property name="minimumSize">
+         <size>
+          <width>300</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>360</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="title">
+         <string>联系人详情</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayoutDetail">
+         <property name="spacing">
+          <number>8</number>
+         </property>
+         <item>
+          <layout class="QFormLayout" name="formLayoutDetail">
+           <property name="labelAlignment">
+            <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+           </property>
+           <property name="formAlignment">
+            <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+           </property>
+           <property name="horizontalSpacing">
+            <number>8</number>
+           </property>
+           <property name="verticalSpacing">
+            <number>10</number>
+           </property>
+           <item row="0" column="0">
+            <widget class="QLabel" name="labelId">
+             <property name="text">
+              <string>编号：</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="labelName">
+             <property name="text">
+              <string>姓名：</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="labelPhone">
+             <property name="text">
+              <string>手机号：</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="labelType">
+             <property name="text">
+              <string>类别：</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="labelBirthday">
+             <property name="text">
+              <string>生日：</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="labelAddress">
+             <property name="text">
+              <string>地址/备注：</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QLineEdit" name="lineEditAddress">
+             <property name="placeholderText">
+              <string>如：软件园宿舍</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QDateEdit" name="dateEditBirthday">
+             <property name="maximumDate">
+              <date>
+               <year>2099</year>
+               <month>12</month>
+               <day>31</day>
+              </date>
+             </property>
+             <property name="minimumDate">
+              <date>
+               <year>1900</year>
+               <month>1</month>
+               <day>1</day>
+              </date>
+             </property>
+             <property name="displayFormat">
+              <string>yyyy-MM-dd</string>
+             </property>
+             <property name="calendarPopup">
+              <bool>true</bool>
+             </property>
+             <property name="date">
+              <date>
+               <year>2000</year>
+               <month>1</month>
+               <day>1</day>
+              </date>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QComboBox" name="comboType">
+             <property name="editable">
+              <bool>true</bool>
+             </property>
+             <property name="placeholderText">
+              <string>选择或输入类别</string>
+             </property>
+             <item>
+              <property name="text">
+               <string>同学</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>教师</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>家人</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>社团</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>其他</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLineEdit" name="lineEditPhone">
+             <property name="inputMask">
+              <string>99999999999</string>
+             </property>
+             <property name="maxLength">
+              <number>11</number>
+             </property>
+             <property name="placeholderText">
+              <string>11位手机号码</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLineEdit" name="lineEditName">
+             <property name="placeholderText">
+              <string>联系人姓名（必填）</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="lineEditId">
+             <property name="placeholderText">
+              <string>如 C001（添加后不可修改）</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayoutFormButtons">
+           <property name="spacing">
+            <number>6</number>
+           </property>
+           <item>
+            <widget class="QPushButton" name="btnSaveOrAdd">
+             <property name="toolTip">
+              <string>新增或保存联系人</string>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font-weight: bold;</string>
+             </property>
+             <property name="text">
+              <string>添加联系人</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btnClearForm">
+             <property name="toolTip">
+              <string>清空表单内容</string>
+             </property>
+             <property name="text">
+              <string>清空表单</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="verticalSpacerDetail">
+           <property name="orientation">
+            <enum>Qt::Orientation::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>960</width>
+     <height>33</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>文件(&amp;F)</string>
+    </property>
+    <addaction name="actionLoad"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionSaveAs"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>编辑(&amp;E)</string>
+    </property>
+    <addaction name="actionAdd"/>
+    <addaction name="actionModify"/>
+    <addaction name="actionDelete"/>
+   </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>查看(&amp;V)</string>
+    </property>
+    <addaction name="actionRefresh"/>
+    <addaction name="actionSortById"/>
+    <addaction name="actionSortByName"/>
+    <addaction name="actionSortByBirthday"/>
+    <addaction name="separator"/>
+    <addaction name="actionStatistics"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>帮助(&amp;H)</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuView"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>工具栏</string>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonStyle::ToolButtonTextBesideIcon</enum>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionAdd"/>
+   <addaction name="actionDelete"/>
+   <addaction name="actionModify"/>
+   <addaction name="separator"/>
+   <addaction name="actionLoad"/>
+   <addaction name="actionSave"/>
+   <addaction name="separator"/>
+   <addaction name="actionBirthdayReminder"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="sizeGripEnabled">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <action name="actionAdd">
+   <property name="icon">
+    <iconset theme="list-add"/>
+   </property>
+   <property name="text">
+    <string>添加联系人</string>
+   </property>
+   <property name="toolTip">
+    <string>添加新的联系人</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionDelete">
+   <property name="icon">
+    <iconset theme="list-remove"/>
+   </property>
+   <property name="text">
+    <string>删除联系人</string>
+   </property>
+   <property name="toolTip">
+    <string>删除选中的联系人</string>
+   </property>
+   <property name="shortcut">
+    <string>Del</string>
+   </property>
+  </action>
+  <action name="actionModify">
+   <property name="icon">
+    <iconset theme="document-edit"/>
+   </property>
+   <property name="text">
+    <string>修改联系人</string>
+   </property>
+   <property name="toolTip">
+    <string>修改选中联系人的信息</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+M</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="icon">
+    <iconset theme="document-save"/>
+   </property>
+   <property name="text">
+    <string>保存</string>
+   </property>
+   <property name="toolTip">
+    <string>保存通讯录到文件</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionSaveAs">
+   <property name="text">
+    <string>另存为...</string>
+   </property>
+   <property name="toolTip">
+    <string>将通讯录另存为其他文件</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+S</string>
+   </property>
+  </action>
+  <action name="actionLoad">
+   <property name="icon">
+    <iconset theme="document-open"/>
+   </property>
+   <property name="text">
+    <string>打开文件</string>
+   </property>
+   <property name="toolTip">
+    <string>从CSV文件读取通讯录数据</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="icon">
+    <iconset theme="application-exit"/>
+   </property>
+   <property name="text">
+    <string>退出</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionRefresh">
+   <property name="text">
+    <string>刷新列表</string>
+   </property>
+   <property name="shortcut">
+    <string>F5</string>
+   </property>
+  </action>
+  <action name="actionSortById">
+   <property name="text">
+    <string>按编号排序</string>
+   </property>
+  </action>
+  <action name="actionSortByName">
+   <property name="text">
+    <string>按姓名排序</string>
+   </property>
+  </action>
+  <action name="actionSortByBirthday">
+   <property name="text">
+    <string>按生日排序</string>
+   </property>
+  </action>
+  <action name="actionStatistics">
+   <property name="text">
+    <string>统计信息</string>
+   </property>
+  </action>
+  <action name="actionBirthdayReminder">
+   <property name="icon">
+    <iconset theme="appointment-reminder"/>
+   </property>
+   <property name="text">
+    <string>生日提醒</string>
+   </property>
+   <property name="toolTip">
+    <string>查看未来N天内生日的联系人</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>关于</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
