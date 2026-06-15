@@ -17,6 +17,7 @@ class MainWindow : public QMainWindow
   public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
+    bool addContacts();
 
   private:
     Ui::MainWindow *ui;

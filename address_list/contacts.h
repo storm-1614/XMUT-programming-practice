@@ -2,6 +2,7 @@
 #define CONTACTS_H
 
 #include <QString>
+#include <QDate>
 #include "date.h"
 
 class Contacts
@@ -9,14 +10,22 @@ class Contacts
   public:
     Contacts();
     int getId();
-    QString getName();
-    QString getPhoneNumber();
-    QString getType();
-    QString getRemarks();
-    Date getBirth();
+    QString getName() const;
+    QString getPhoneNumber() const;
+    QString getType() const;
+    QString getRemarks() const;
+    Date getBirth() const;
+    bool setId(QString strID);
+    bool setName(QString name);
+    bool setType(QString type);
+    bool setBirth(QDate birthday);
+    bool setRemarks(QString strInfo);
+
+    void debugInfo();
+
 
   private:
-    int id;
+    QString id;
     QString name;
     QString phoneNumber;
     QString type;

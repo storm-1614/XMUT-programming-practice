@@ -1,6 +1,7 @@
 QT += widgets
 
 CONFIG += c++17
+CONFIG += console
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -8,12 +9,14 @@ CONFIG += c++17
 
 SOURCES += \
     contacts.cpp \
+    contactslist.cpp \
     date.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     contacts.h \
+    contactslist.h \
     date.h \
     mainwindow.h
 
