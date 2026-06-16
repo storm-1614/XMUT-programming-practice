@@ -18,15 +18,23 @@ class contactsList
     bool modifyContacts();
     bool loadFromTable(QTableWidget *table);
     bool setPath(const char *path);
-    bool readcsv();
+    size_t size();
+    bool readcsv(); 
     bool saveContacts();
     bool saveContacts(std::string path);
     std::vector<Contacts> &readContactList();
+    const std::map<int, int> &getTypeListMap();
+    void typeMapRebuild();
 
   private:
     std::vector<Contacts> data;
     std::string csv_path;
     csv_file csv;
+    std::map<int, int> typeMap{{Contacts::schoolmates, 0},
+                               {Contacts::teachers, 0},
+                               {Contacts::family, 0},
+                               {Contacts::clubs, 0},
+                               {Contacts::other, 0}};
 };
 
 #endif // CONTACTSLIST_H

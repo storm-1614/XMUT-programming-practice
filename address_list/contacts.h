@@ -1,10 +1,9 @@
 #ifndef CONTACTS_H
 #define CONTACTS_H
 
-#include <QString>
-#include <QDate>
 #include "date.h"
-#include "csv_file.h"
+#include <QDate>
+#include <QString>
 
 class Contacts
 {
@@ -26,6 +25,14 @@ class Contacts
 
     void debugInfo();
 
+    enum typeList
+    {
+        schoolmates = 0,
+        teachers,
+        family,
+        clubs,
+        other
+    };
 
   private:
     QString id;

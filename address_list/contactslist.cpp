@@ -16,6 +16,27 @@ contactsList::~contactsList()
 }
 bool contactsList::addNewContacts(Contacts ct)
 {
+    QString type = ct.getType();
+    if (type == "同学")
+    {
+        typeMap[Contacts::schoolmates]++;
+    }
+    else if (type == "教师")
+    {
+        typeMap[Contacts::teachers]++;
+    }
+    else if (type == "家人")
+    {
+        typeMap[Contacts::family]++;
+    }
+    else if (type == "社团")
+    {
+        typeMap[Contacts::clubs]++;
+    }
+    else
+    {
+        typeMap[Contacts::other]++;
+    }
     data.emplace_back(ct);
     return true;
 }
@@ -25,6 +46,28 @@ bool contactsList::removeContacts(std::set<int> rows)
     for (auto it = rows.rbegin(); it != rows.rend(); ++it)
     {
         QTextStream(stdout) << "删除行: " << *it << "\n";
+        QString type = (data.begin() + *it)->getType();
+        if (type == "同学")
+        {
+            typeMap[Contacts::schoolmates]--;
+        }
+        else if (type == "教师")
+        {
+            typeMap[Contacts::teachers]--;
+        }
+        else if (type == "家人")
+        {
+            typeMap[Contacts::family]--;
+        }
+        else if (type == "社团")
+        {
+            typeMap[Contacts::clubs]--;
+        }
+        else
+        {
+            typeMap[Contacts::other]--;
+        }
+
         data.erase(data.begin() + *it);
     }
     return true;
@@ -62,6 +105,11 @@ bool contactsList::setPath(const char *path)
     csv_path = path;
     return true;
 }
+
+size_t contactsList::size()
+{
+    return data.size();
+}
 bool contactsList::readcsv()
 {
     if (!data.empty())
@@ -91,6 +139,7 @@ bool contactsList::readcsv()
             ct.setRemarks(QString::fromStdString(f5));
 
         data.emplace_back(ct);
+        typeMapRebuild();
     }
     QTextStream(stdout) << "读取成功\n";
     return true;
@@ -117,4 +166,42 @@ bool contactsList::saveContacts(std::string path)
 std::vector<Contacts> &contactsList::readContactList()
 {
     return data;
+}
+
+const std::map<int, int> &contactsList::getTypeListMap()
+{
+    return typeMap;
+}
+
+void contactsList::typeMapRebuild()
+{
+    for (auto &map : typeMap)
+    {
+        map.second = 0;
+    }
+
+    for (auto iter : data)
+    {
+        QString type = iter.getType();
+        if (type == "同学")
+        {
+            typeMap[Contacts::schoolmates]++;
+        }
+        else if (type == "教师")
+        {
+            typeMap[Contacts::teachers]++;
+        }
+        else if (type == "家人")
+        {
+            typeMap[Contacts::family]++;
+        }
+        else if (type == "社团")
+        {
+            typeMap[Contacts::clubs]++;
+        }
+        else
+        {
+            typeMap[Contacts::other]++;
+        }
+    }
 }

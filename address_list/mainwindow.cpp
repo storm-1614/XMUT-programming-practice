@@ -24,12 +24,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->btnSaveOrAdd, &QPushButton::clicked, this, [this]() { addContacts(); });
     connect(ui->btnClearForm, &QPushButton::clicked, this, [this]() { clearForm(); });
     connect(ui->btnSearch, &QPushButton::clicked, this, [this]() { searchClicked(); });
+    connect(ui->btnStatistics, &QPushButton::clicked, this, [this]() { statistics(); });
 
     connect(ui->actionAdd, &QAction::triggered, this, [this]() { actionAddItem(); });
     connect(ui->actionDelete, &QAction::triggered, this, [this]() { actionDelItem(); });
     connect(ui->actionModify, &QAction::triggered, this, [this]() { actionModifyItem(); });
     connect(ui->actionLoad, &QAction::triggered, this, [this]() { actionOpenCsv(); });
-    connect(ui->actionSave, &QAction::triggered, this, [this](){actionSaveCsv();});
+    connect(ui->actionSave, &QAction::triggered, this, [this]() { actionSaveCsv(); });
 
     updateContacts();
 }
@@ -129,6 +130,20 @@ bool MainWindow::searchClicked()
         break;
     }
     }
+    return true;
+}
+
+bool MainWindow::statistics()
+{
+    QString info = QString("联系人数量：%1\n").arg(conList->size());
+    QString type = QString("类型：\n同学：%1\n教师：%2\n家人：%3\n社团：%4\n其他：%5\n")
+                       .arg(conList->getTypeListMap().at(Contacts::schoolmates))
+                       .arg(conList->getTypeListMap().at(Contacts::teachers))
+                       .arg(conList->getTypeListMap().at(Contacts::family))
+                       .arg(conList->getTypeListMap().at(Contacts::clubs))
+                       .arg(conList->getTypeListMap().at(Contacts::other));
+
+    QMessageBox::information(this, "统计信息", info+type, QMessageBox::Ok);
     return true;
 }
 
