@@ -151,6 +151,10 @@ std::map<int, int> typeMap{{Contacts::schoolmates, 0},
 
 #### `std::vector<std::string> csv_file::division(const std::string &line)`
 按逗号分块，这块原本用 getline 会忽略空项，还是自己写字符串解析比较好。  
+
+### about
+关于界面类  
+
 ## 🏁进度
 - [x] Contact 初始化
 - [x] 添加联系人 toolBar 子窗口实现
@@ -161,5 +165,7 @@ std::map<int, int> typeMap{{Contacts::schoolmates, 0},
 - [ ] 日期算法
 - [ ] 排序算法
 - [x] 联系人修改
+- [x] 统计信息
 - [ ] 生日提醒
 - [ ] 菜单栏补全
+- [x] 关于

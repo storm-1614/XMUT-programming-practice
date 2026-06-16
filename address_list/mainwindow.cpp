@@ -7,6 +7,7 @@
 #include "qmessagebox.h"
 #include "searchbyname.h"
 #include "searchbynumber.h"
+#include "about.h"
 #include "ui_mainwindow.h"
 #include <QFileDialog>
 #include <QMessageBox>
@@ -31,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->actionModify, &QAction::triggered, this, [this]() { actionModifyItem(); });
     connect(ui->actionLoad, &QAction::triggered, this, [this]() { actionOpenCsv(); });
     connect(ui->actionSave, &QAction::triggered, this, [this]() { actionSaveCsv(); });
+    connect(ui->actionAbout, &QAction::triggered, this, [this](){menuAbout();});
 
     updateContacts();
 }
@@ -252,4 +254,13 @@ bool MainWindow::actionSaveCsv()
         return true;
     }
     return false;
+}
+
+
+bool MainWindow::menuAbout()
+{
+    about *aboutWin = new about;
+    QTextStream(stdout) << "关于界面\n";
+    aboutWin->show();
+    return true;
 }

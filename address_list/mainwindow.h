@@ -33,6 +33,8 @@ class MainWindow : public QMainWindow
     bool actionOpenCsv();  
     bool actionSaveCsv(); 
 
+    bool menuAbout();
+
   private slots:
   private:
     Ui::MainWindow *ui;
