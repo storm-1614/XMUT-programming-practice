@@ -1,7 +1,9 @@
 #include "contactslist.h"
 #include "contacts.h"
 #include "csv_file.h"
+#include <algorithm>
 #include "qdebug.h"
+#include "qmessagebox.h"
 #include <vector>
 
 contactsList::contactsList()
@@ -16,6 +18,7 @@ contactsList::~contactsList()
 }
 bool contactsList::addNewContacts(Contacts ct)
 {
+
     QString type = ct.getType();
     if (type == "同学")
     {

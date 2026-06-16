@@ -30,14 +30,22 @@ void AddNewContacts::clearForm()
 void AddNewContacts::SaveOrAdd()
 {
     Contacts new_contacts;
+    std::vector<Contacts> list = conList->readContactList();
     if (ui->lineEditId->text().isEmpty())
     {
         QMessageBox::critical(this, "缺少项", "未输入编号");
-        return ;
+        return;
     }
     else if (ui->lineEditName->text().isEmpty())
     {
         QMessageBox::critical(this, "缺少项", "未输入姓名");
+        return;
+    }
+    else if (std::find_if(list.begin(), list.end(),
+                          [&](const Contacts &obj) { return obj.getId() == ui->lineEditId->text(); }) != list.end())
+    {
+
+        QMessageBox::critical(this, "重复", "重复编号");
         return;
     }
 
