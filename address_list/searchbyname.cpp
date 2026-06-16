@@ -4,7 +4,7 @@
 
 searchByName::searchByName() : search()
 {
-    list = conList.readContactList();
+    list = conList->readContactList();
 }
 
 std::vector<int> searchByName::find(const QString &Target)

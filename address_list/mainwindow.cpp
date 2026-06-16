@@ -8,13 +8,13 @@
 #include <set>
 #include <vector>
 
-contactsList conList;
+contactsList *conList = new contactsList;
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     ui->tableContacts->setSelectionMode(QAbstractItemView::MultiSelection); // 多选
-    ui->tableContacts->setSortingEnabled(false);
+    ui->tableContacts->setSortingEnabled(false);            // 禁止默认排序
     connect(ui->btnSaveOrAdd, &QPushButton::clicked, this, [this]() { addContacts(); });
     connect(ui->btnClearForm, &QPushButton::clicked, this, [this]() { clearForm(); });
     connect(ui->btnSearch, &QPushButton::clicked, this, [this]() { searchClicked(); });
@@ -25,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
 MainWindow::~MainWindow()
 {
+    delete conList;
     delete ui;
 }
 
@@ -42,7 +43,7 @@ bool MainWindow::addContacts()
     new_contacts.setRemarks(ui->lineEditAddress->text());
 
     new_contacts.debugInfo();
-    conList.addNewContacts(new_contacts);
+    conList->addNewContacts(new_contacts);
 
     updateContacts();
     return true;
@@ -53,7 +54,7 @@ bool MainWindow::addContacts()
  */
 bool MainWindow::updateContacts()
 {
-    std::vector<Contacts> contacts = conList.readContactList();
+    std::vector<Contacts> contacts = conList->readContactList();
 
     int row = contacts.size();
 
@@ -144,7 +145,7 @@ bool MainWindow::actionAddItem()
 bool MainWindow::actionDelItem()
 {
     QList<QTableWidgetItem *> selectdItems = ui->tableContacts->selectedItems();
-    std::vector<Contacts> &list = conList.readContactList();
+    std::vector<Contacts> &list = conList->readContactList();
 
     std::set<int> rows;
     for (QTableWidgetItem *item : selectdItems)

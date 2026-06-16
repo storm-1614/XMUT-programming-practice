@@ -3,7 +3,7 @@
 
 searchByNumber::searchByNumber():search()
 {
-    list = conList.readContactList();
+    list = conList->readContactList();
 }
 
 std::vector<int> searchByNumber::find(const QString &Target)

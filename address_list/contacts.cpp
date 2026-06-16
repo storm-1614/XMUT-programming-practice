@@ -1,8 +1,6 @@
 #include "contacts.h"
 #include "qdebug.h"
-#include "qlogging.h"
 #include <QTextStream>
-#include <iostream>
 
 Contacts::Contacts()
 {
@@ -61,6 +59,16 @@ bool Contacts::setBirth(QDate birthday)
     int day = birthday.day();
     int month = birthday.month();
     int year = birthday.year();
+    Date birth(year, month, day);
+    this->Birth = birth;
+    return true;
+}
+// y-m-d
+bool Contacts::setBirth(QString birthStr)
+{
+    int year = birthStr.section('-', 0, 0).toInt();
+    int month = birthStr.section('-', 1, 1).toInt();
+    int day = birthStr.section('-', 2,2).toInt();
     Date birth(year, month, day);
     this->Birth = birth;
     return true;

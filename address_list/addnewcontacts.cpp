@@ -37,7 +37,7 @@ void AddNewContacts::SaveOrAdd()
     new_contacts.setRemarks(ui->lineEditAddress->text());
 
     new_contacts.debugInfo();
-    conList.addNewContacts(new_contacts);
+    conList->addNewContacts(new_contacts);
 
     this->close();
 }

@@ -74,6 +74,12 @@ extern contactsList conList;
 
 #### `const std::vector<Contacts>& contactsList::readContactList() const`
 
+#### `bool contactsList::readcsv()`
+读取 csv 文件  
+
+#### `bool contactsList::saveContacts()`
+保存联系人列表到 csv 文件中
+
 返回数据数组。  
 ### search
 搜索基类  
@@ -92,12 +98,20 @@ extern contactsList conList;
 ### csv_file
 文件读写到 csv 文件
 
+#### `std::vector<std::vector<std::string>> csv_file::load_from_csv(const char *path)`
+加载 csv 文件
+
+#### `bool csv_file::write_to_csv(const char *path, std::vector<std::vector<std::string>> data)`
+写入 csv 文件  
+
+#### `std::vector<std::string> csv_file::division(const std::string &line)`
+按逗号分块，这块原本用 getline 会忽略空项，还是自己写字符串解析比较好。  
 ## 进度
 - [x] Contact 初始化
 - [x] 添加联系人 toolBar 子窗口实现
 - [ ] 搜索
 - [ ] 删除选中项
-- [ ] 文件读写——数据持久化
+- [x] 文件读写——数据持久化
 - [ ] 日期算法
 - [ ] 排序算法
 - [ ] 联系人修改

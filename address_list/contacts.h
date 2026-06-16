@@ -4,6 +4,7 @@
 #include <QString>
 #include <QDate>
 #include "date.h"
+#include "csv_file.h"
 
 class Contacts
 {
@@ -20,6 +21,7 @@ class Contacts
     bool setPhoneNumber(QString number);
     bool setType(QString type);
     bool setBirth(QDate birthday);
+    bool setBirth(QString birthStr); // y-m-d
     bool setRemarks(QString strInfo);
 
     void debugInfo();

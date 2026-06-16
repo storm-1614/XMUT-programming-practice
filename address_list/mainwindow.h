@@ -5,7 +5,7 @@
 #include "contactslist.h"
 #include <QMainWindow>
 
-extern contactsList conList;
+extern contactsList *conList;
 
 QT_BEGIN_NAMESPACE
 namespace Ui
