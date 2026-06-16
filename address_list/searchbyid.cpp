@@ -1,17 +1,15 @@
-#include "searchbynumber.h"
-#include "mainwindow.h"
+#include "searchbyid.h"
 
-searchByNumber::searchByNumber() : search()
+searchById::searchById() : search()
 {
     list = conList->readContactList();
 }
 
-std::vector<int> searchByNumber::find(const QString &Target)
+std::vector<int> searchById::find(const QString &Target)
 {
     std::vector<int> selectList;
     for (size_t i = 0; i < list.size(); ++i)
     {
-        // 精准匹配，也是 O(n)
         if (list[i].getPhoneNumber() == Target)
         {
             selectList.emplace_back(i);

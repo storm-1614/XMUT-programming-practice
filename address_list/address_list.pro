@@ -16,6 +16,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     search.cpp \
+    searchbyid.cpp \
     searchbyname.cpp \
     searchbynumber.cpp \
     statistics.cpp
@@ -29,6 +30,7 @@ HEADERS += \
     date.h \
     mainwindow.h \
     search.h \
+    searchbyid.h \
     searchbyname.h \
     searchbynumber.h \
     statistics.h

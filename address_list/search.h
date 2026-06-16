@@ -4,6 +4,9 @@
 #include "contacts.h"
 #include <QString>
 
+/*
+ * 搜索基类，应该差不多是一个抽象类吧？
+ */
 class search
 {
   public:

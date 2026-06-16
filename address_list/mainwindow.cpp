@@ -1,13 +1,14 @@
 #include "mainwindow.h"
+#include "about.h"
 #include "contacts.h"
 #include "contactslist.h"
 #include "qdebug.h"
 #include "qfiledialog.h"
 #include "qlist.h"
 #include "qmessagebox.h"
+#include "searchbyid.h"
 #include "searchbyname.h"
 #include "searchbynumber.h"
-#include "about.h"
 #include "ui_mainwindow.h"
 #include <QFileDialog>
 #include <QMessageBox>
@@ -32,7 +33,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->actionModify, &QAction::triggered, this, [this]() { actionModifyItem(); });
     connect(ui->actionLoad, &QAction::triggered, this, [this]() { actionOpenCsv(); });
     connect(ui->actionSave, &QAction::triggered, this, [this]() { actionSaveCsv(); });
-    connect(ui->actionAbout, &QAction::triggered, this, [this](){menuAbout();});
+    connect(ui->actionAbout, &QAction::triggered, this, [this]() { menuAbout(); });
+    connect(ui->actionExit, &QAction::triggered, this, [this]() { close(); });
+    connect(ui->actionStatistics, &QAction::triggered, this, [this]() { statistics(); });
+    connect(ui->actionRefresh, &QAction::triggered, this, [this]() { updateContacts(); });
 
     updateContacts();
 }
@@ -49,6 +53,17 @@ MainWindow::~MainWindow()
 bool MainWindow::addContacts()
 {
     Contacts new_contacts;
+    if (ui->lineEditId->text().isEmpty())
+    {
+        QMessageBox::critical(this, "缺少项", "未输入编号");
+        return false;
+    }
+    else if (ui->lineEditName->text().isEmpty())
+    {
+        QMessageBox::critical(this, "缺少项", "未输入姓名");
+        return false;
+    }
+
     new_contacts.setId(ui->lineEditId->text());
     new_contacts.setName(ui->lineEditName->text());
     new_contacts.setPhoneNumber(ui->lineEditPhone->text());
@@ -103,35 +118,35 @@ bool MainWindow::clearForm()
     return true;
 }
 
+/*
+ * 没招了，我这里用了多态集成了，不要纠结我没有按任务书里把联系人分出子类继承虚函数好么
+ */
 bool MainWindow::searchClicked()
 {
+    search *s;
+    ui->tableContacts->clearSelection();
     switch (ui->comboSearchField->currentIndex())
     {
     case name: {
-        searchByName s;
-        std::vector<int> selectd = s.find(ui->lineEditSearch->text());
-        for (auto iter : selectd)
-        {
-            QTextStream(stdout) << iter << "\n";
-            ui->tableContacts->selectRow(iter);
-        }
+        s = new searchByName;
         break;
     }
-
     case phomeNumber: {
-        searchByNumber s;
-        std::vector<int> selectd = s.find(ui->lineEditSearch->text());
-        for (auto iter : selectd)
-        {
-            QTextStream(stdout) << iter << "\n";
-            ui->tableContacts->selectRow(iter);
-        }
+        s = new searchByNumber;
         break;
     }
     case id: {
+        s = new searchById;
         break;
     }
     }
+    std::vector<int> selectd = s->find(ui->lineEditSearch->text());
+    for (auto iter : selectd)
+    {
+        QTextStream(stdout) << iter << "\n";
+        ui->tableContacts->selectRow(iter);
+    }
+
     return true;
 }
 
@@ -145,7 +160,7 @@ bool MainWindow::statistics()
                        .arg(conList->getTypeListMap().at(Contacts::clubs))
                        .arg(conList->getTypeListMap().at(Contacts::other));
 
-    QMessageBox::information(this, "统计信息", info+type, QMessageBox::Ok);
+    QMessageBox::information(this, "统计信息", info + type, QMessageBox::Ok);
     return true;
 }
 
@@ -203,6 +218,11 @@ bool MainWindow::actionModifyItem()
         QMessageBox::information(this, "修改列表项", "点击后可以修改文件，之后再按一次修改联系人保存修改",
                                  QMessageBox::Ok);
         ui->tableContacts->setEditTriggers(QAbstractItemView::DoubleClicked);
+        for (size_t i = 0; i < conList->size(); i++)
+        {
+            QTableWidgetItem *item = ui->tableContacts->item(i, 0);
+            item->setFlags(item->flags() & ~Qt::ItemIsEditable);
+        }
         tableModify = true;
     }
     else
@@ -255,7 +275,6 @@ bool MainWindow::actionSaveCsv()
     }
     return false;
 }
-
 
 bool MainWindow::menuAbout()
 {

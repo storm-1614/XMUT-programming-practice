@@ -135,6 +135,9 @@ std::map<int, int> typeMap{{Contacts::schoolmates, 0},
 ### searchbynumber
 按电话号码搜索子类  
 
+### searchbyid
+按编号搜索子类
+
 ### statistics
 统计输出类  
 
@@ -158,7 +161,7 @@ std::map<int, int> typeMap{{Contacts::schoolmates, 0},
 ## 🏁进度
 - [x] Contact 初始化
 - [x] 添加联系人 toolBar 子窗口实现
-- [ ] 搜索
+- [x] 搜索
 - [x] 删除选中项
 - [x] 文件读写——数据持久化
 - [x] 保存文件
@@ -167,5 +170,5 @@ std::map<int, int> typeMap{{Contacts::schoolmates, 0},
 - [x] 联系人修改
 - [x] 统计信息
 - [ ] 生日提醒
-- [ ] 菜单栏补全
+- [x] 菜单栏补全
 - [x] 关于

@@ -1,7 +1,8 @@
 #include "addnewcontacts.h"
+#include "contacts.h"
 #include "mainwindow.h"
 #include "ui_addnewcontacts.h"
-#include "contacts.h"
+#include <QMessageBox>
 
 AddNewContacts::AddNewContacts(QWidget *parent) : QMainWindow(parent), ui(new Ui::AddNewContacts)
 {
@@ -29,6 +30,17 @@ void AddNewContacts::clearForm()
 void AddNewContacts::SaveOrAdd()
 {
     Contacts new_contacts;
+    if (ui->lineEditId->text().isEmpty())
+    {
+        QMessageBox::critical(this, "缺少项", "未输入编号");
+        return ;
+    }
+    else if (ui->lineEditName->text().isEmpty())
+    {
+        QMessageBox::critical(this, "缺少项", "未输入姓名");
+        return;
+    }
+
     new_contacts.setId(ui->lineEditId->text());
     new_contacts.setName(ui->lineEditName->text());
     new_contacts.setPhoneNumber(ui->lineEditPhone->text());

@@ -536,9 +536,6 @@
      <string>查看(&amp;V)</string>
     </property>
     <addaction name="actionRefresh"/>
-    <addaction name="actionSortById"/>
-    <addaction name="actionSortByName"/>
-    <addaction name="actionSortByBirthday"/>
     <addaction name="separator"/>
     <addaction name="actionStatistics"/>
    </widget>

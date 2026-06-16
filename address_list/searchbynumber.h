@@ -9,7 +9,7 @@ class searchByNumber:public search
 {
   public:
     searchByNumber();
-    std::vector<int> find(const QString &Target);
+    std::vector<int> find(const QString &Target) override;
 };
 
 #endif // SEARCHBYNUMBER_H

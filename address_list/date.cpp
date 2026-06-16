@@ -3,7 +3,6 @@
 
 Date::Date()
 {
-    
 }
 
 Date::Date(int y, int m, int d)
@@ -13,10 +12,18 @@ Date::Date(int y, int m, int d)
     this->day = d;
 }
 
-
 const QString Date::text() const
 {
     const QString text = QString("%1-%2-%3").arg(year).arg(month).arg(day);
     return text;
 }
 
+bool Date::isLeapYear()
+{
+}
+bool Date::isValid()
+{
+}
+bool Date::dayTo()
+{
+}
