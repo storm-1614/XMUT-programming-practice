@@ -1,11 +1,14 @@
 #include "mainwindow.h"
 #include "contacts.h"
+#include "contactslist.h"
 #include "qdebug.h"
+#include "qfiledialog.h"
 #include "qlist.h"
 #include "qmessagebox.h"
 #include "searchbyname.h"
 #include "searchbynumber.h"
 #include "ui_mainwindow.h"
+#include <QFileDialog>
 #include <QMessageBox>
 #include <set>
 #include <vector>
@@ -24,6 +27,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     connect(ui->actionAdd, &QAction::triggered, this, [this]() { actionAddItem(); });
     connect(ui->actionDelete, &QAction::triggered, this, [this]() { actionDelItem(); });
+    connect(ui->actionModify, &QAction::triggered, this, [this]() { actionModifyItem(); });
+    connect(ui->actionLoad, &QAction::triggered, this, [this]() { actionOpenCsv(); });
+    connect(ui->actionSave, &QAction::triggered, this, [this](){actionSaveCsv();});
 
     updateContacts();
 }
@@ -120,7 +126,7 @@ bool MainWindow::searchClicked()
         break;
     }
     case id: {
-    break;
+        break;
     }
     }
     return true;
@@ -173,10 +179,62 @@ bool MainWindow::actionDelItem()
     return true;
 }
 
-
 bool MainWindow::actionModifyItem()
 {
-    QList<QTableWidgetItem *> selectedItems = ui->tableContacts->selectedItems();
+    if (tableModify == false)
+    {
+        QMessageBox::information(this, "修改列表项", "点击后可以修改文件，之后再按一次修改联系人保存修改",
+                                 QMessageBox::Ok);
+        ui->tableContacts->setEditTriggers(QAbstractItemView::DoubleClicked);
+        tableModify = true;
+    }
+    else
+    {
+        switch (QMessageBox::warning(this, "警告", "是否要修改内容", QMessageBox::Yes, QMessageBox::No))
+        {
+        case QMessageBox::Yes:
+            break;
+        case QMessageBox::No:
+            return false;
+            break;
+        }
+
+        conList->loadFromTable(ui->tableContacts);
+        ui->tableContacts->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        tableModify = false;
+    }
 
     return true;
+}
+
+bool MainWindow::actionOpenCsv()
+{
+    QString fileName =
+        QFileDialog::getOpenFileName(this, tr("选择 csv 文件"), ".", tr("csv文件 (*.csv);;所有文件 (*.*)"));
+    if (!fileName.isEmpty())
+    {
+        QTextStream(stdout) << "选中文件:" << fileName << "\n";
+        conList->setPath(fileName.toStdString().c_str());
+        conList->readcsv();
+        updateContacts();
+
+        return true;
+    }
+    return false;
+}
+
+bool MainWindow::actionSaveCsv()
+{
+    QString fileName =
+        QFileDialog::getOpenFileName(this, tr("选择 csv 文件"), ".", tr("csv文件 (*.csv);;所有文件 (*.*)"));
+    if (!fileName.isEmpty())
+    {
+        QTextStream(stdout) << "选中文件:" << fileName << "\n";
+        conList->setPath(fileName.toStdString().c_str());
+        conList->saveContacts(fileName.toStdString());
+        updateContacts();
+
+        return true;
+    }
+    return false;
 }

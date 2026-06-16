@@ -41,6 +41,15 @@ extern contactsList conList;
 #### `bool MainWindow::actionDelItem()`
 删除选中的联系人列表  
 
+#### `bool MainWindow::actionModifyItem()`
+修改列表项，点击后使表格可修改，修改完成再点击一次保存修改并且表格变成不可修改。  
+
+#### `bool MainWindow::actionOpenCsv()`
+打开新的 csv 文件，并修改 contactslist.data  和 path  
+
+#### `bool MainWindow::actionSaveCsv()`
+保存到新的 csv 文件，并修改 contactsList.data 和 path
+
 ### date
 日期类  
 #### `const QString Date::text() const`
@@ -66,10 +75,10 @@ extern contactsList conList;
 添加新的联系人  
 
 #### `bool contactsList::removeContacts()`
-还没实现！！！
+删除列表项
 
 #### `bool contactsList::modifyContacts()`
-还没实现！！！
+从 QTable 中加载回 contactsList.data  
 
 
 #### `const std::vector<Contacts>& contactsList::readContactList() const`
@@ -110,9 +119,11 @@ extern contactsList conList;
 - [x] Contact 初始化
 - [x] 添加联系人 toolBar 子窗口实现
 - [ ] 搜索
-- [ ] 删除选中项
+- [x] 删除选中项
 - [x] 文件读写——数据持久化
+- [x] 保存文件
 - [ ] 日期算法
 - [ ] 排序算法
-- [ ] 联系人修改
+- [x] 联系人修改
 - [ ] 生日提醒
+- [ ] 菜单栏补全

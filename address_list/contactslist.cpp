@@ -1,4 +1,5 @@
 #include "contactslist.h"
+#include "contacts.h"
 #include "csv_file.h"
 #include "qdebug.h"
 #include <vector>
@@ -11,7 +12,7 @@ contactsList::contactsList()
 
 contactsList::~contactsList()
 {
-    saveContacts();
+    saveContacts(csv_path);
 }
 bool contactsList::addNewContacts(Contacts ct)
 {
@@ -34,8 +35,37 @@ bool contactsList::modifyContacts()
     return true;
 }
 
+/*
+ * 从表格中加载回 vector
+ *
+ */
+bool contactsList::loadFromTable(QTableWidget *table)
+{
+    this->data.clear();
+    int rows = table->rowCount();
+    for (int i = 0; i < rows; i++)
+    {
+        Contacts new_contacts;
+        new_contacts.setId(table->item(i, 0)->text());
+        new_contacts.setName(table->item(i, 1)->text());
+        new_contacts.setPhoneNumber(table->item(i, 2)->text());
+        new_contacts.setType(table->item(i, 3)->text());
+        new_contacts.setBirth(table->item(i, 4)->text());
+        new_contacts.setRemarks(table->item(i, 5)->text());
+        this->data.emplace_back(new_contacts);
+    }
+    return true;
+}
+
+bool contactsList::setPath(const char *path)
+{
+    csv_path = path;
+    return true;
+}
 bool contactsList::readcsv()
 {
+    if (!data.empty())
+        data.clear();
     csv = csv_file();
     std::vector<std::vector<std::string>> csv_data = csv.load_from_csv(csv_path.c_str());
     for (auto line : csv_data)
@@ -65,7 +95,7 @@ bool contactsList::readcsv()
     QTextStream(stdout) << "读取成功\n";
     return true;
 }
-bool contactsList::saveContacts()
+bool contactsList::saveContacts(std::string path)
 {
     std::vector<std::vector<std::string>> csv_data(0, std::vector<std::string>(6));
     for (auto contact : data)
@@ -80,7 +110,7 @@ bool contactsList::saveContacts()
         csv_data.emplace_back(linedata);
     }
 
-    csv.write_to_csv(csv_path.c_str(), csv_data);
+    csv.write_to_csv(path.c_str(), csv_data);
     QTextStream(stdout) << csv_data.size() << "保存成功\n";
     return true;
 }
