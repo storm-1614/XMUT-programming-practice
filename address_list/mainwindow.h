@@ -27,6 +27,9 @@ class MainWindow : public QMainWindow
     bool searchClicked();
     bool actionAddItem();
     bool actionDelItem();
+    bool actionModifyItem();  // TODO:
+    bool actionOpenCsv();  // TODO: 
+    bool actionSaveCsv();  // TODO:
 
   private slots:
   private:

@@ -3,6 +3,8 @@
 
 #include "contacts.h"
 #include "csv_file.h"
+#include <set>
+#include <string>
 #include <vector>
 
 class contactsList
@@ -11,7 +13,7 @@ class contactsList
     contactsList();
     ~contactsList();
     bool addNewContacts(Contacts ct);
-    bool removeContacts();
+    bool removeContacts(std::set<int> rows);
     bool modifyContacts();
     bool readcsv();
     bool saveContacts();
@@ -19,6 +21,7 @@ class contactsList
 
   private:
     std::vector<Contacts> data;
+    std::string csv_path;
     csv_file csv;
 
 };

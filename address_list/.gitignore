@@ -4,6 +4,7 @@
 *~
 *.autosave
 *.a
+*.csv
 *.core
 *.moc
 *.o
