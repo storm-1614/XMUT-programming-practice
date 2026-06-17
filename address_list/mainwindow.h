@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "addnewcontacts.h"
+#include "birthreminder.h"
 #include "contactslist.h"
 #include <QMainWindow>
 
@@ -26,6 +27,7 @@ class MainWindow : public QMainWindow
     bool clearForm();
     bool searchClicked();
     bool statistics();
+    bool birthdayReminder();
 
     bool actionAddItem();
     bool actionDelItem();
@@ -39,6 +41,8 @@ class MainWindow : public QMainWindow
   private:
     Ui::MainWindow *ui;
     AddNewContacts *add_contacts_win = nullptr;
+    birthReminder *br_win = nullptr;
+
     bool tableModify = false;
 
     enum searchType

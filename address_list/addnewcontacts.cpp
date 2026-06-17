@@ -34,18 +34,21 @@ void AddNewContacts::SaveOrAdd()
     if (ui->lineEditId->text().isEmpty())
     {
         QMessageBox::critical(this, "缺少项", "未输入编号");
+        ui->lineEditId->setFocus();
         return;
     }
     else if (ui->lineEditName->text().isEmpty())
     {
         QMessageBox::critical(this, "缺少项", "未输入姓名");
+        ui->lineEditName->setFocus();
         return;
     }
     else if (std::find_if(list.begin(), list.end(),
                           [&](const Contacts &obj) { return obj.getId() == ui->lineEditId->text(); }) != list.end())
     {
 
-        QMessageBox::critical(this, "重复", "重复编号");
+        QMessageBox::critical(this, "重复", QString("编号 %1 已存在").arg(ui->lineEditId->text()));
+        ui->lineEditId->setFocus();
         return;
     }
 

@@ -32,6 +32,12 @@ QString Contacts::getBirth() const
     return Birth.text();
 }
 
+
+Date Contacts::getBirthMeta() const
+{
+    return Birth;
+}
+
 bool Contacts::setId(QString strID)
 {
     this->id = strID;

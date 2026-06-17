@@ -9,6 +9,7 @@ CONFIG += c++17
 SOURCES += \
     about.cpp \
     addnewcontacts.cpp \
+    birthreminder.cpp \
     contacts.cpp \
     contactslist.cpp \
     csv_file.cpp \
@@ -24,6 +25,7 @@ SOURCES += \
 HEADERS += \
     about.h \
     addnewcontacts.h \
+    birthreminder.h \
     contacts.h \
     contactslist.h \
     csv_file.h \
@@ -38,6 +40,7 @@ HEADERS += \
 FORMS += \
     about.ui \
     addnewcontacts.ui \
+    birthreminder.ui \
     mainwindow.ui
 
 # Default rules for deployment.

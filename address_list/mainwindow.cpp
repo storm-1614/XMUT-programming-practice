@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "about.h"
+#include "birthreminder.h"
 #include "contacts.h"
 #include "contactslist.h"
 #include "qdebug.h"
@@ -12,6 +13,7 @@
 #include "ui_mainwindow.h"
 #include <QFileDialog>
 #include <QMessageBox>
+#include <cmath>
 #include <set>
 #include <vector>
 
@@ -27,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->btnClearForm, &QPushButton::clicked, this, [this]() { clearForm(); });
     connect(ui->btnSearch, &QPushButton::clicked, this, [this]() { searchClicked(); });
     connect(ui->btnStatistics, &QPushButton::clicked, this, [this]() { statistics(); });
+    connect(ui->btnBirthdayReminder, &QPushButton::clicked, this, [this]() { birthdayReminder(); });
 
     connect(ui->actionAdd, &QAction::triggered, this, [this]() { actionAddItem(); });
     connect(ui->actionDelete, &QAction::triggered, this, [this]() { actionDelItem(); });
@@ -57,17 +60,21 @@ bool MainWindow::addContacts()
     if (ui->lineEditId->text().isEmpty())
     {
         QMessageBox::critical(this, "缺少项", "未输入编号");
+        ui->lineEditId->setFocus();
         return false;
     }
     else if (ui->lineEditName->text().isEmpty())
     {
         QMessageBox::critical(this, "缺少项", "未输入姓名");
+        ui->lineEditName->setFocus();
         return false;
     }
-    else if (std::find_if(list.begin(), list.end(), [&](const Contacts& obj){return obj.getId() == ui->lineEditId->text();}) != list.end())
+    else if (std::find_if(list.begin(), list.end(),
+                          [&](const Contacts &obj) { return obj.getId() == ui->lineEditId->text(); }) != list.end())
     {
 
-        QMessageBox::critical(this, "重复", "重复编号");
+        QMessageBox::critical(this, "重复", QString("编号 %1 已存在请输入其它编号").arg(ui->lineEditId->text()));
+        ui->lineEditId->setFocus();
         return false;
     }
 
@@ -95,7 +102,7 @@ bool MainWindow::updateContacts()
     int row = contacts.size();
 
     ui->tableContacts->clearContents();
-    ui->tableContacts->setRowCount(contacts.size());
+    ui->tableContacts->setRowCount(row);
 
     for (int i = 0; i < row; i++)
     {
@@ -168,6 +175,31 @@ bool MainWindow::statistics()
                        .arg(conList->getTypeListMap().at(Contacts::other));
 
     QMessageBox::information(this, "统计信息", info + type, QMessageBox::Ok);
+    return true;
+}
+
+bool MainWindow::birthdayReminder()
+{
+    QDate qdate = ui->dateEditToday->date();
+    Date date(qdate.year(), qdate.month(), qdate.day());
+    int afterDay = ui->spinBoxRemindDays->value();
+    std::vector<Contacts> list = conList->readContactList();
+    std::vector<Contacts> rangerList;
+
+    for (auto iter : list)
+    {
+        if (abs(iter.getBirthMeta().dayTo(date, true)) <= afterDay)
+            rangerList.emplace_back(iter);
+    }
+
+    if (br_win == nullptr)
+    {
+        br_win = new birthReminder(this);
+        br_win->initialList(rangerList);
+        br_win->show();
+    }
+    connect(br_win, &MainWindow::destroyed, this, [this]() { br_win = nullptr; });
+
     return true;
 }
 

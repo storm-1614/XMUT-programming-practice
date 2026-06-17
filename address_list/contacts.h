@@ -15,6 +15,7 @@ class Contacts
     QString getType() const;
     QString getRemarks() const;
     QString getBirth() const;
+    Date getBirthMeta() const;
     bool setId(QString strID);
     bool setName(QString name);
     bool setPhoneNumber(QString number);
