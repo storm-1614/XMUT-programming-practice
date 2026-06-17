@@ -8,6 +8,7 @@ birthReminder::birthReminder(QWidget *parent) : QMainWindow(parent), ui(new Ui::
     ui->setupUi(this);
     QTextStream(stdout) << "生日提醒窗口打开\n";
     connect(ui->btnNo, &QPushButton::clicked, this, [this](){close();});
+    connect(ui->btnYes, &QPushButton::clicked, this, [this](){doReminder();});
 }
 
 birthReminder::~birthReminder()
@@ -35,3 +36,9 @@ bool birthReminder::initialList(std::vector<Contacts> list)
 }
 
 
+void birthReminder::doReminder()
+{
+    QList<QTableWidgetItem *> selectedItems = ui->tableContacts->selectedItems();
+    
+    close();
+}

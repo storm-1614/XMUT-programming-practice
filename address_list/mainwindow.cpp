@@ -188,7 +188,8 @@ bool MainWindow::birthdayReminder()
 
     for (auto iter : list)
     {
-        if (abs(iter.getBirthMeta().dayTo(date, true)) <= afterDay)
+        int dayTo = iter.getBirthMeta().dayTo(date, true);
+        if (dayTo >= 0 && dayTo <= afterDay)
             rangerList.emplace_back(iter);
     }
 
@@ -237,10 +238,10 @@ bool MainWindow::actionDelItem()
         break;
     }
 
-    QList<QTableWidgetItem *> selectdItems = ui->tableContacts->selectedItems();
+    QList<QTableWidgetItem *> selectedItems = ui->tableContacts->selectedItems();
 
     std::set<int> rows;
-    for (QTableWidgetItem *item : selectdItems)
+    for (QTableWidgetItem *item : selectedItems)
     {
         rows.insert(item->row());
     }

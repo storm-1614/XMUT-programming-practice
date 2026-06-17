@@ -18,6 +18,7 @@ class birthReminder : public QMainWindow
     explicit birthReminder(QWidget *parent = nullptr);
     ~birthReminder();
     bool initialList(std::vector<Contacts> list);
+    void doReminder();
 
   private:
     Ui::birthReminder *ui;

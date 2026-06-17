@@ -169,6 +169,6 @@ std::map<int, int> typeMap{{Contacts::schoolmates, 0},
 - [ ] 排序算法
 - [x] 联系人修改
 - [x] 统计信息
-- [ ] 生日提醒
+- [x] 生日提醒
 - [x] 菜单栏补全
 - [x] 关于

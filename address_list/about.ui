@@ -64,7 +64,7 @@
     <item>
      <widget class="QLabel" name="labelSchool">
       <property name="text">
-       <string>程序设计实践作业</string>
+       <string>storm-1614  程序设计实践作业</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignmentFlag::AlignCenter</set>
