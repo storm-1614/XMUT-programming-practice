@@ -1,0 +1,26 @@
+[
+  {
+    "file": "./main.cpp",
+    "arguments": [
+      "/usr/bin/g++",
+      "./main.cpp",
+      "-o",
+      "TreasureMaze",
+      "-Iinclude"
+    ],
+    "directory": "/data/project/XMUT-programming-practice/TreasureMaze",
+    "output": "TreasureMaze"
+  },
+  {
+    "file": "./src/game.cpp",
+    "arguments": [
+      "/usr/bin/g++",
+      "./src/game.cpp",
+      "-o",
+      "TreasureMaze",
+      "-Iinclude"
+    ],
+    "directory": "/data/project/XMUT-programming-practice/TreasureMaze",
+    "output": "TreasureMaze"
+  }
+]
