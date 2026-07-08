@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     conList = new contactsList;
     ui->setupUi(this);
     ui->tableContacts->setSelectionMode(QAbstractItemView::MultiSelection); // 多选
-    ui->tableContacts->setSortingEnabled(false);                            // 禁止默认排序
+    ui->tableContacts->setSortingEnabled(true);                             // 禁止默认排序
     connect(ui->btnSaveOrAdd, &QPushButton::clicked, this, [this]() { addContacts(); });
     connect(ui->btnClearForm, &QPushButton::clicked, this, [this]() { clearForm(); });
     connect(ui->btnSearch, &QPushButton::clicked, this, [this]() { searchClicked(); });
@@ -153,6 +153,9 @@ bool MainWindow::searchClicked()
         s = new searchById;
         break;
     }
+    default:
+        s = nullptr;
+        return false;
     }
     std::vector<int> selectd = s->find(ui->lineEditSearch->text());
     for (auto iter : selectd)
@@ -161,6 +164,7 @@ bool MainWindow::searchClicked()
         ui->tableContacts->selectRow(iter);
     }
 
+    delete s;
     return true;
 }
 

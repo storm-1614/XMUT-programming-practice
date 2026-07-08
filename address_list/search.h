@@ -11,6 +11,7 @@ class search
 {
   public:
     search();
+    virtual ~search() = default;
     virtual std::vector<int> find(const QString &Target) = 0;
 
     void setTarget(const QString &target);
